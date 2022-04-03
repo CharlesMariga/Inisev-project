@@ -44,7 +44,9 @@ export default new Vuex.Store({
     },
     getUsers({ commit }) {
       axios
-        .get("http://localhost:3000/users")
+        .get(
+          "https://my-json-server.typicode.com/CharlesMariga/inisev-project/users"
+        )
         .then((res) => commit("SET_USERS", res.data));
     },
   },
