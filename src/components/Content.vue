@@ -23,6 +23,6 @@ export default {
   widows: 100vw;
   height: 100vh;
   display: grid;
-  grid-template-columns: 400px 1fr;
+  grid-template-columns: 300px 1fr;
 }
 </style>

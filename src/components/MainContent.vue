@@ -1,22 +1,27 @@
 <template>
   <main class="main-content">
-    <div class="main-content__heading-container">
-      <h2 class="main-content__heading">Users</h2>
-    </div>
-    <div class="main-content__grid">
-      <UserCard v-for="user in users" :key="user.index" :user="user" />
+    <Modal />
+    <div class="main-content__container">
+      <div class="main-content__heading-container">
+        <h2 class="main-content__heading">Users</h2>
+      </div>
+      <div class="main-content__grid">
+        <UserCard v-for="user in users" :key="user.index" :user="user" />
+      </div>
     </div>
   </main>
 </template>
 
 <script>
 import UserCard from "./UserCard.vue";
+import Modal from "./Modal.vue";
 import { mapState } from "vuex";
 
 export default {
   name: "MainContent",
   components: {
     UserCard,
+    Modal,
   },
   computed: {
     ...mapState(["users"]),
@@ -29,6 +34,14 @@ export default {
 
 <style lang="scss">
 .main-content {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+
+  &__container {
+    overflow-y: auto;
+  }
+
   &__heading-container {
     display: flex;
     justify-content: flex-end;

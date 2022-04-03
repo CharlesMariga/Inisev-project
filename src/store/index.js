@@ -12,6 +12,8 @@ export default new Vuex.Store({
     password: "",
     isLoggedIn: loggedIn,
     users: [],
+    userModalOpen: false,
+    modalContent: {},
   },
   mutations: {
     SET_CREDENTIALS(state, { username, password }) {
@@ -23,6 +25,12 @@ export default new Vuex.Store({
     },
     SET_USERS(state, users) {
       state.users = users;
+    },
+    SET_USER_MODAL_STATUS(state, status) {
+      state.userModalOpen = status;
+    },
+    SET_MODAL_CONTENT(state, user) {
+      state.modalContent = user;
     },
   },
   actions: {
@@ -48,6 +56,14 @@ export default new Vuex.Store({
           "https://my-json-server.typicode.com/CharlesMariga/inisev-project/users"
         )
         .then((res) => commit("SET_USERS", res.data));
+    },
+    openUserModal({ commit }, user) {
+      commit("SET_MODAL_CONTENT", user);
+      commit("SET_USER_MODAL_STATUS", true);
+    },
+    closeUserModal({ commit }) {
+      commit("SET_MODAL_CONTENT", {});
+      commit("SET_USER_MODAL_STATUS", false);
     },
   },
 });
