@@ -18,11 +18,16 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .content {
   widows: 100vw;
   height: 100vh;
   display: grid;
   grid-template-columns: 300px 1fr;
+
+  @media screen and (max-width: 320px) {
+    position: relative;
+    grid-template-columns: 1fr;
+  }
 }
 </style>

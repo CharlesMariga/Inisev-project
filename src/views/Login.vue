@@ -1,5 +1,9 @@
 <template>
   <div class="login">
+    <Alert
+      :show="alertShown"
+      text="Incorrect username or password. Please try again!"
+    />
     <div class="login__container">
       <h1 class="login__heading">Sign in into your account</h1>
       <form class="login__form" @submit="login($event)" method="POST">
@@ -33,12 +37,18 @@
 </template>
 
 <script>
+import Alert from "../components/Alert.vue";
+
 export default {
   name: "Login",
+  components: {
+    Alert,
+  },
   data() {
     return {
       username: "",
       password: "",
+      alertShown: false,
     };
   },
   methods: {
@@ -55,8 +65,15 @@ export default {
             this.$router.push({ name: "Users" });
           } else {
             // Show an error message
+            this.showAlert();
           }
         });
+    },
+    showAlert() {
+      this.alertShown = true;
+      setTimeout(() => {
+        this.alertShown = false;
+      }, 5000);
     },
   },
 };
@@ -69,6 +86,7 @@ export default {
   justify-content: center;
   width: 100vw;
   height: 100vh;
+  position: relative;
 
   &__container {
     display: flex;

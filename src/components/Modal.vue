@@ -54,10 +54,9 @@ export default {
   },
   methods: {
     closeModal(e) {
-      console.log(e.target);
       if (
-        e.target.classlist.contains("modal") ||
-        e.target.classlist.contains("modal__close-icon")
+        e.target.classList.contains("modal") ||
+        e.target.classList.contains("modal__close-icon")
       )
         this.$store.dispatch("closeUserModal");
     },
@@ -84,13 +83,11 @@ export default {
   justify-content: center;
   opacity: 0;
   visibility: hidden;
-  display: none;
-  transition: all 0.5s ease-in-out;
+  transition: all 250ms ease-in-out;
 
   &--open {
     opacity: 1 !important;
     visibility: visible !important;
-    display: flex !important;
   }
 
   &__close-icon {
@@ -109,9 +106,14 @@ export default {
     grid-template-columns: 30% 1fr;
     border-radius: 10px;
     position: relative;
+    margin: 0 3rem;
 
     transform: scale(0.5);
-    transition: all 2s ease-in-out;
+    transition: all 250ms ease-in;
+
+    @media screen and (max-width: 320px) {
+      grid-template-columns: 1fr;
+    }
 
     &--open {
       transform: scale(1);
@@ -146,6 +148,10 @@ export default {
     gap: 1rem;
     align-items: center;
     font-size: 3rem;
+
+    @media screen and (max-width: 320px) {
+      font-size: 2rem;
+    }
 
     a {
       text-decoration: none;

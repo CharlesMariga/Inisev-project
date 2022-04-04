@@ -1,5 +1,8 @@
 <template>
   <main class="main-content">
+    <div class="side-nav-opener" @click="showSideNav">
+      <span class="material-icons">menu</span>
+    </div>
     <Modal />
     <div class="main-content__container">
       <div class="main-content__heading-container">
@@ -25,6 +28,11 @@ export default {
   },
   computed: {
     ...mapState(["users"]),
+  },
+  methods: {
+    showSideNav() {
+      this.$store.dispatch("openSideNav");
+    },
   },
   mounted() {
     this.$store.dispatch("getUsers");
@@ -71,6 +79,17 @@ export default {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(20rem, 25rem));
     gap: 10rem;
+  }
+}
+
+.side-nav-opener {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  cursor: pointer;
+
+  @media screen and (min-width: 320px) {
+    display: none;
   }
 }
 </style>

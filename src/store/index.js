@@ -14,6 +14,7 @@ export default new Vuex.Store({
     users: [],
     userModalOpen: false,
     modalContent: {},
+    sideNavOpen: false,
   },
   mutations: {
     SET_CREDENTIALS(state, { username, password }) {
@@ -31,6 +32,9 @@ export default new Vuex.Store({
     },
     SET_MODAL_CONTENT(state, user) {
       state.modalContent = user;
+    },
+    SET_SIDE_NAV_STATUS(state, status) {
+      state.sideNavOpen = status;
     },
   },
   actions: {
@@ -62,8 +66,16 @@ export default new Vuex.Store({
       commit("SET_USER_MODAL_STATUS", true);
     },
     closeUserModal({ commit }) {
-      commit("SET_MODAL_CONTENT", {});
+      setTimeout(() => {
+        commit("SET_MODAL_CONTENT", {});
+      }, 300);
       commit("SET_USER_MODAL_STATUS", false);
+    },
+    openSideNav({ commit }) {
+      commit("SET_SIDE_NAV_STATUS", true);
+    },
+    closeSideNav({ commit }) {
+      commit("SET_SIDE_NAV_STATUS", false);
     },
   },
 });

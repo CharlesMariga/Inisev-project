@@ -1,5 +1,8 @@
 <template>
-  <div class="side-nav">
+  <div class="side-nav" :class="sideNavOpen ? 'side-nav--open' : ''">
+    <div class="side-nav-close" @click="hideSideNav">
+      <span class="material-icons">keyboard_double_arrow_left</span>
+    </div>
     <h1 class="logo">Logo Ipsum</h1>
     <ul class="menu">
       <li class="menu__item" v-for="item in 3" :key="item">Menu Item</li>
@@ -12,13 +15,21 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   name: "SideNav",
+  computed: {
+    ...mapState(["sideNavOpen"]),
+  },
   methods: {
     logout() {
       this.$store.dispatch("logout").then((res) => {
         if (res) this.$router.push({ name: "Login" });
       });
+    },
+    hideSideNav() {
+      this.$store.dispatch("closeSideNav");
     },
   },
 };
@@ -29,6 +40,22 @@ export default {
   padding: 2.4rem 3.2rem;
   height: 100%;
   position: relative;
+  background-color: white;
+
+  @media screen and (max-width: 320px) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 200;
+    transform: translateX(-100%);
+    transition: all 250ms ease-in-out;
+
+    &--open {
+      transform: translateX(0);
+    }
+  }
 }
 
 .logo {
@@ -66,6 +93,17 @@ export default {
     transform: rotatez(180deg);
     margin-right: 2rem;
     cursor: pointer;
+  }
+}
+
+.side-nav-close {
+  position: absolute;
+  right: 2rem;
+  top: 2rem;
+  cursor: pointer;
+
+  @media screen and (min-width: 320px) {
+    display: none;
   }
 }
 </style>
