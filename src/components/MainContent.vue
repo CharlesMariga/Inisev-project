@@ -44,7 +44,6 @@ export default {
 .main-content {
   position: relative;
   height: 100vh;
-  overflow: hidden;
 
   &__container {
     overflow-y: auto;
